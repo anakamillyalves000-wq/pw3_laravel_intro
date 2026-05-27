@@ -6,32 +6,35 @@
     <title>Produtos - Laravel</title>
 </head>
 <body>
-    <h1>Cadastro de produtos<h1>
+    <h1>Cadastro de Produtos</h1>
 
     <form action="/produtos" method="post">
-        @csrf 
+        @csrf
 
-        <label for ="nome">Nome</label>
-        <input type="text" id="nome" name ="nome" required><br><br>
+        <label for="nome">Nome</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
 
-        <label for ="preco">Preço</label>
-        <input type="text"  step ="0.01" id="preco" name ="preco" required><br><br>
+        <label for="preco">Preço</label><br>
+        <input type="number" step="0.01" id="preco" name="preco" required><br><br>
 
-        <label for ="estoque">Estoque</label>
-        <input type="text" id="estoque" name ="estoque" required><br><br>
+        <label for="estoque">Estoque</label><br>
+        <input type="number" id="estoque" name="estoque" required><br><br>
 
-        <button type ="submit">Salvar</button>
+        <button type="submit">Salvar</button>
+    </form>
 
-        <h2>lista de produtos</h2>
+    <h2>Lista de produtos</h2>
 
-</form>
-
-
- @if($produtos ->isEmpty())
-
-        @else
-
-        @endif
-    
+    @if($produtos->isEmpty())
+        <p>Nenhum produto cadastrado.</p>
+    @else
+        <ul>
+            @foreach($produtos as $produto)
+                <li>
+                    {{ $produto->nome }} - R$ {{ number_format($produto->preco, 2, ',', '.') }} - Estoque: {{ $produto->estoque }}
+                </li>
+            @endforeach
+        </ul>
+    @endif
 </body>
 </html>
