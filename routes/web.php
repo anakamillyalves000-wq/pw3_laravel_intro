@@ -15,12 +15,12 @@ Route::view('/landing', 'landing');
 Route::get('/admin', [UserController::class, 'index']);
 
 // Rotas de Usuários (Cadastro)
-Route::get('/usuarios/create', [UserController::class, 'create']);
+Route::get('/usuarios/novo', [UserController::class, 'create']);
 Route::post('/usuarios', [UserController::class, 'store']);
 
 // Rotas de Usuários (Edição e Atualização)
 Route::get('/usuarios/{id}/edit', [UserController::class, 'edit']);
-Route::put('/usuarios/{id}', [UserController::class, 'update']);
+Route::post('/usuarios/{id}', [UserController::class, 'update']);
 
 // Rotas da agenda de eventos
 Route::get('/eventos', [EventosController::class, 'index']);
@@ -38,6 +38,11 @@ Route::get('/teste-orm', function(){
     return User::all();
 });
 
+
+
 // Rotas de produtos
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
+
+// Rota de exclusão (DELETE)
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy']);
