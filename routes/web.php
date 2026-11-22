@@ -1,15 +1,17 @@
 <?php
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdutoController;
 
 Route::get('/', function () {
     return view('home');
 });
 
 Route::view('/landing', 'landing');
+
+
 
 // Rota principal do painel administrativo
 Route::get('/admin', [UserController::class, 'index']);
@@ -39,10 +41,7 @@ Route::get('/teste-orm', function(){
 });
 
 
-
-// Rotas de produtos
-Route::get('/produtos', [ProdutoController::class, 'index']);
-Route::post('/produtos', [ProdutoController::class, 'store']);
-
 // Rota de exclusão (DELETE)
 Route::delete('/usuarios/{id}', [UserController::class, 'destroy']);
+
+Route::resource('produtos', ProdutoController::class);
